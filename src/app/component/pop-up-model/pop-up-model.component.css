@@ -1,0 +1,6 @@
+.anyClass {
+	height:150px;
+    width: 100%;
+	overflow-y: scroll;
+  }
+  /deep/ .cdk-overlay-container { z-index: 9999; }

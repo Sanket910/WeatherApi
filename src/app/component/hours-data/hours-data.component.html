@@ -1,0 +1,9 @@
+<div class="row">
+    <ng-container *ngFor="let hour of hours">
+        <div class="col-md-1 col-sm-1 center-block text-center">
+            {{hour.time | date :'ha'}} <br>
+            <img src="{{hour.condition.icon}}"><br>
+            {{hour.temp_c | number : '1.0-0'}}<span>&#176;</span>
+        </div>
+    </ng-container>
+</div>

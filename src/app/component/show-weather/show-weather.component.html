@@ -1,0 +1,20 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <app-pop-up-model></app-pop-up-model>
+</div>
+<div class="container bg-primary text-white" *ngIf="weatherInfo!=undefined">
+    <app-current></app-current>
+    <hr class="bg-danger border-2 border-top border-danger">
+    <app-hours-data></app-hours-data>
+    <hr class="bg-danger border-2 border-top border-danger">
+    <div class="row">
+        <app-week-data class="col-md-7 col-sm-7"></app-week-data>
+        <app-astro-data class="col-md-4 col-sm-4"></app-astro-data>
+    </div>
+    <hr class="bg-danger border-2 border-top border-danger">
+    <div class="row">
+        <app-air-quality class="col-md-4 col-sm-4"></app-air-quality>
+        <app-uv-index class="col-md-4 col-sm-4"></app-uv-index>
+    </div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">City List</button>
+</div>

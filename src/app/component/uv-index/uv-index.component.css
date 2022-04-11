@@ -1,0 +1,24 @@
+
+.progress {
+    width: 0px;
+    height: 100px;
+
+  }
+  
+.right {
+	border-right: 1px solid #ccc;
+}
+  .gradient-bk {
+  background: -moz-linear-gradient(rgba(0,211,56,1) 0%, rgba(252,252,0,1) 30%,  rgba(255,46,0,1) 50% ,rgb(73, 1, 95) 70%,rgb(92, 3, 3) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient( rgba(0,211,56,1) 0%,rgba(252,252,0,1) 30%,rgba(255,46,0,1) 50% ,rgb(73, 1, 95) 70%,rgb(92, 3, 3) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient( rgba(0,211,56,1) 0%,rgba(252,252,0,1) 30%,rgba(255,46,0,1) 50% ,rgb(73, 1, 95) 70%,rgb(92, 3, 3) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00d338', endColorstr='#ff2e00',GradientType=1 ); /* IE6-9 */
+  }
+  
+  .progress span {
+  color: black;
+  opacity: .5;
+  font-size: .8rem
+  }
+  
+  

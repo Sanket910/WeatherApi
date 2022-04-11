@@ -1,0 +1,8 @@
+.right {
+	border-right: 1px solid #ccc;
+}
+.anyClass {
+	height:150px;
+	overflow-y: scroll;
+  }
+ 

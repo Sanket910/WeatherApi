@@ -1,0 +1,52 @@
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title text-center">City Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <form (ngSubmit)="saveCity()">
+                <mat-form-field>
+                    <input matInput placeholder="Begin typing a city name" [(ngModel)]="cityName" aria-label="City"
+                        [formControl]="cityControl" [matAutocomplete]="autoCity">
+                    <mat-autocomplete #autoCity="matAutocomplete">
+                        <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+                            {{getCityDisplayName(city)}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-card-actions>
+                    <button mat-raised-button type="submit" color="primary">Add City</button>
+                </mat-card-actions>
+            </form>
+            <div cdkDropList class="list-group anyClass" (cdkDropListDropped)="drop($event)">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Sr.No.</th>
+                            <th>City</th>
+                            <th>Max Temp</th>
+                            <th>Min Temp</th>
+                            <th>Weather</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let city of cities" cdkDrag>
+                            <td>{{city.sort_id}}</td>
+                            <td>{{city.city_name}}</td>
+                            <td>{{city.maxtemp_c | number : '1.0-0'}}</td>
+                            <td>{{city.mintemp_c | number : '1.0-0'}}</td>
+                            <td>{{city.weather_type}}</td>
+                            <td><button type="button" class="btn btn-danger btn-sm"
+                                    (click)="deleteCity(city.id)">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
