@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RootObject } from 'src/app/common/root-object';
 import { WeatherService } from 'src/app/service/weather.service';
 
@@ -8,11 +8,11 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./air-quality.component.css']
 })
 export class AirQualityComponent implements OnInit {
-  weatherInfo!: RootObject;
+  @Input() weatherInfo!: RootObject;
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
-    this.weatherInfo = this.wheatherService.rootObj;
+
   }
 
 }

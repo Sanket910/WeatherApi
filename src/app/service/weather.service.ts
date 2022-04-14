@@ -12,14 +12,9 @@ export class WeatherService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private baseurl = 'http://localhost:9004/weather';
-  headers = { 'Authorization': 'Bearer my-token', 'My-Custom-Header': 'foobar' };
+  private baseurl = 'http://localhost:8762/weather';
 
   getWeatherInfo(location: string): Observable<RootObject> {
-    return this.httpClient.get<RootObject>(`${this.baseurl + '/getWeather'}/${location}`).pipe(
-      map(data =>
-        this.rootObj = data
-      )
-    );
+    return this.httpClient.get<RootObject>(`${this.baseurl}/${location}`);
   }
 }

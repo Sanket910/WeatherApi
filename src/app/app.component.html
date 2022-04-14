@@ -1,3 +1,11 @@
-<div *ngIf="weatherInfo!=undefined">
-    <router-outlet></router-outlet>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <app-pop-up-model [cities]="cities"></app-pop-up-model>
+</div>
+<div class="container bg-primary text-white" *ngIf="show">
+<router-outlet></router-outlet>
+<button type="button" class="btn btn-primary" (click)="previousCity()">Previous City</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">City
+    List</button>
+<button type="button" class="btn btn-primary" (click)="nextCity()">Next City</button>       
 </div>

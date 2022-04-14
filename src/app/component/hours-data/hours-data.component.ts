@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Hour } from 'src/app/common/hour';
 import { RootObject } from 'src/app/common/root-object';
 import { WeatherService } from 'src/app/service/weather.service';
@@ -9,13 +9,17 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./hours-data.component.css']
 })
 export class HoursDataComponent implements OnInit {
-  weatherInfo!: RootObject;
   hours: Hour[] = [];
   count: number = 0;
+  @Input() weatherInfo!: RootObject;
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
-    this.weatherInfo = this.wheatherService.rootObj;
+  }
+
+  ngOnChanges() {
+    this.count = 0
+    this.hours = [];
     this.getHoursList();
   }
 

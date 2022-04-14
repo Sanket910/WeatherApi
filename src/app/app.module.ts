@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
@@ -21,7 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpModelComponent } from './component/pop-up-model/pop-up-model.component';
 import { CityListComponent } from './component/city-list/city-list.component';
 import { AddCityComponent } from './component/add-city/add-city.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule, MatRippleModule } from '@angular/material/core';
@@ -33,7 +33,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { GeoDbFreeModule } from 'wft-geodb-angular-client';
-
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { GeoDbFreeModule } from 'wft-geodb-angular-client';
     HttpClientModule,
     DragDropModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MatSidenavModule,
     BrowserAnimationsModule,
@@ -75,7 +76,8 @@ import { GeoDbFreeModule } from 'wft-geodb-angular-client';
       apiKey: '',
       serviceUri: 'http://geodb-free-service.wirefreethought.com'
     }),
-    
+    MDBBootstrapModule
+
   ],
   providers: [WeatherService, CityService],
   bootstrap: [AppComponent]

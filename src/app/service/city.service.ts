@@ -9,26 +9,26 @@ import { CityWeather } from '../common/city-weather';
 })
 export class CityService {
 
-  private baseurl = 'http://localhost:9004/city';
+  private baseurl = 'http://localhost:8762/city';
   constructor(private httpClient: HttpClient) { }
 
   getCities(): Observable<CityWeather[]> {
 
-    return this.httpClient.get<CityWeather[]>(this.baseurl + '/getCities');
+    return this.httpClient.get<CityWeather[]>(this.baseurl);
   }
 
   saveCity(city: City): Observable<City> {
 
-    return this.httpClient.post<City>(this.baseurl + '/saveCity', city);
+    return this.httpClient.post<City>(this.baseurl, city);
   }
 
   deleteCity(id: number) {
 
-    return this.httpClient.delete(`${this.baseurl + '/deleteCity'}/${id}`, { responseType: 'text' });
+    return this.httpClient.delete(`${this.baseurl}/${id}`, { responseType: 'text' });
   }
 
   saveSortList(cities: CityWeather[]) {
-    console.log(cities)
+
     return this.httpClient.post(this.baseurl + '/saveSortList', cities, { responseType: 'text' });
   }
 

@@ -1,8 +1,7 @@
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title text-center">City Information</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <h1 class="modal-title text-center text-dark">City Information</h1>
         </div>
         <div class="modal-body">
             <form (ngSubmit)="saveCity()">
@@ -28,16 +27,18 @@
                             <th>Max Temp</th>
                             <th>Min Temp</th>
                             <th>Weather</th>
+                            <th>View</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let city of cities" cdkDrag>
-                            <td>{{city.sort_id}}</td>
-                            <td>{{city.city_name}}</td>
-                            <td>{{city.maxtemp_c | number : '1.0-0'}}</td>
-                            <td>{{city.mintemp_c | number : '1.0-0'}}</td>
-                            <td>{{city.weather_type}}</td>
+                            <td>{{city.sortId}}</td>
+                            <td>{{city.cityName}}</td>
+                            <td>{{city.maxtempC | number : '1.0-0'}}</td>
+                            <td>{{city.mintempC | number : '1.0-0'}}</td>
+                            <td>{{city.weatherType}}</td>
+                            <td><a data-bs-dismiss="modal" routerLink="/showWeather/{{city.cityName}}">view</a></td>
                             <td><button type="button" class="btn btn-danger btn-sm"
                                     (click)="deleteCity(city.id)">Delete</button></td>
                         </tr>

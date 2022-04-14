@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AstroToday } from 'src/app/common/astro-today';
 import { RootObject } from 'src/app/common/root-object';
 import { WeatherService } from 'src/app/service/weather.service';
@@ -10,11 +10,13 @@ import { WeatherService } from 'src/app/service/weather.service';
 })
 export class AstroDataComponent implements OnInit {
   astroToday = new AstroToday();
-  weatherInfo!: RootObject;
+  @Input() weatherInfo!: RootObject;
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
-    this.weatherInfo = this.wheatherService.rootObj;
+  }
+
+  ngOnChanges() {
     this.getAstroData();
   }
 
@@ -33,8 +35,6 @@ export class AstroDataComponent implements OnInit {
       }
     }
   }
-
-
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { City } from 'src/app/common/city';
 import { CityService } from 'src/app/service/city.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { CityWeather } from 'src/app/common/city-weather';
 import { FormControl } from '@angular/forms';
 import { PlaceDetails } from 'wft-geodb-angular-client/lib/model/place-details.model';
-import { map, Observable, of, startWith, switchMap } from 'rxjs';
+import { map, Observable, of, switchMap } from 'rxjs';
 import { PlaceSummary } from 'wft-geodb-angular-client/lib/model/place-summary.model';
 import { GeoDbService } from 'wft-geodb-angular-client';
 import { AutoSuggestConstants } from 'src/app/common/auto-suggest-constants';
@@ -20,7 +20,7 @@ import { GeoResponse } from 'wft-geodb-angular-client/lib/model/geo-response.mod
 export class PopUpModelComponent implements OnInit {
   cityName!: PlaceSummary;
   cityTemp = new City();
-  cities: CityWeather[] = [];
+
   private MIN_CITY_POPULATION = 40000;
   selectedCity!: PlaceDetails;
   cityControl!: FormControl;
@@ -30,14 +30,15 @@ export class PopUpModelComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
 
   constructor(private geoDbService: GeoDbService, private router1: Router, private cityService: CityService) { }
+  @Input()  cities: CityWeather[] = [];
 
   ngOnInit(): void {
-    this.getCityList();
+   // this.getCityList();
     this.showCitySuggestion();
   }
 
   saveCity() {
-    this.cityTemp.city_name = this.cityName.name;
+    this.cityTemp.cityName = this.cityName.name;
     if (this.cityName.name == undefined) {
       alert("City Name is not Correct...!")
     } else {
@@ -72,10 +73,14 @@ export class PopUpModelComponent implements OnInit {
     })
   }
 
+  showCity(location1: string) {
+    console.log(location1);
+    this.router1.navigateByUrl(`showWeather/${this.cities[0].cityName}`);
+    console.log("after")
+  }
+
   showCitySuggestion() {
-
     this.cityControl = new FormControl();
-
     this.filteredCities = this.cityControl.valueChanges
       .pipe(
         switchMap((cityNamePrefix: string) => {

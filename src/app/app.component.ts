@@ -14,8 +14,10 @@ import { CityWeather } from './common/city-weather';
 export class AppComponent {
   weatherInfo!: RootObject;
   cities: CityWeather[] = [];
-
-  constructor(private router1: Router, private wheatherService: WeatherService, private cityService: CityService, private router: ActivatedRoute) { }
+  count: number = 0;
+  show : boolean =false;
+  constructor(private router1: Router, private wheatherService: WeatherService,
+    private cityService: CityService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.getCityList();
@@ -24,18 +26,27 @@ export class AppComponent {
   getCityList() {
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
-      this.getWeather(this.cities[0].city_name);
+      this.show=true;
+      this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
     });
   }
 
-  getWeather(location: string) {
-    this.wheatherService.getWeatherInfo(location).subscribe(
-      data => {
-        this.weatherInfo = data;
-      //  console.log(this.weatherInfo);
-        this.router1.navigate(['showWeather']);
-      }
-    );
+  previousCity() {
+    if (this.count > 0) {
+   
+      this.count--;
+      console.log("previous = "+this.count);
+      this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
+    }
+
+  }
+
+  nextCity() {
+    if (this.count < this.cities.length-1) {
+      this.count++;
+      console.log("next ="+this.count);
+      this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
+    }
   }
 }
 

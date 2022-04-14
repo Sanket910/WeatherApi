@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { RootObject } from 'src/app/common/root-object';
 import { WeatherService } from 'src/app/service/weather.service';
 
@@ -9,9 +10,23 @@ import { WeatherService } from 'src/app/service/weather.service';
 })
 export class ShowWeatherComponent implements OnInit {
   weatherInfo!: RootObject;
-  constructor(private wheatherService: WeatherService) { }
+  name!: string;
+  constructor(private wheatherService: WeatherService, private router: ActivatedRoute) {
+    router.params.subscribe(val => {
+      this.getWeather(val['location']);
+    });
+  }
 
   ngOnInit(): void {
-    this.weatherInfo = this.wheatherService.rootObj;
+  }
+
+  getWeather(location: string) {
+    console.log("inside get weather" + location)
+    this.wheatherService.getWeatherInfo(location).subscribe(
+      data => {
+        this.weatherInfo = data;
+        console.log(this.weatherInfo);
+      }
+    );
   }
 }
