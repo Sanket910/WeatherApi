@@ -34,6 +34,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { GeoDbFreeModule } from 'wft-geodb-angular-client';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -76,8 +77,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
       apiKey: '',
       serviceUri: 'http://geodb-free-service.wirefreethought.com'
     }),
-    MDBBootstrapModule
-
+    MDBBootstrapModule,
+    ToastrModule.forRoot()
   ],
   providers: [WeatherService, CityService],
   bootstrap: [AppComponent]

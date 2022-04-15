@@ -3,9 +3,13 @@
     <app-pop-up-model [cities]="cities"></app-pop-up-model>
 </div>
 <div class="container bg-primary text-white" *ngIf="show">
-<router-outlet></router-outlet>
-<button type="button" class="btn btn-primary" (click)="previousCity()">Previous City</button>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">City
-    List</button>
-<button type="button" class="btn btn-primary" (click)="nextCity()">Next City</button>       
+    <!-- Router outlet -->
+    <router-outlet></router-outlet>
+    <!-- Show weather of previous city in list -->
+    <button type="button" class="btn btn-primary" (click)="previousCity()">Previous City</button>
+    <!-- Show modal popup for city list and add city -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">City
+        List</button>
+    <!-- Show weather of next city in list -->
+    <button type="button" class="btn btn-primary" (click)="nextCity()">Next City</button>
 </div>

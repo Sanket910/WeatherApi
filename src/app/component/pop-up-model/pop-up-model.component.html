@@ -8,7 +8,7 @@
                 <mat-form-field>
                     <input matInput placeholder="Begin typing a city name" [(ngModel)]="cityName" aria-label="City"
                         [formControl]="cityControl" [matAutocomplete]="autoCity">
-                    <mat-autocomplete #autoCity="matAutocomplete">
+                    <mat-autocomplete #autoCity="matAutocomplete" [displayWith]="getCityDisplayName">
                         <mat-option *ngFor="let city of filteredCities | async" [value]="city">
                             {{getCityDisplayName(city)}}
                         </mat-option>
@@ -38,7 +38,9 @@
                             <td>{{city.maxtempC | number : '1.0-0'}}</td>
                             <td>{{city.mintempC | number : '1.0-0'}}</td>
                             <td>{{city.weatherType}}</td>
-                            <td><a data-bs-dismiss="modal" routerLink="/showWeather/{{city.cityName}}">view</a></td>
+                         <!--  <td><a data-bs-dismiss="modal" routerLink="/showWeather/{{city.cityName}}">view</a></td>--> 
+                            <td><button data-bs-dismiss="modal" type="button" class="btn btn-primary btn-sm"
+                                (click)="viewCity(city.cityName)">view</button></td>
                             <td><button type="button" class="btn btn-danger btn-sm"
                                     (click)="deleteCity(city.id)">Delete</button></td>
                         </tr>

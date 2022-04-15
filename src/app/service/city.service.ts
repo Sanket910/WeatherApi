@@ -17,9 +17,9 @@ export class CityService {
     return this.httpClient.get<CityWeather[]>(this.baseurl);
   }
 
-  saveCity(city: City): Observable<City> {
+  saveCity(city: City) {
 
-    return this.httpClient.post<City>(this.baseurl, city);
+    return this.httpClient.post(this.baseurl, city, { responseType: 'text' });
   }
 
   deleteCity(id: number) {

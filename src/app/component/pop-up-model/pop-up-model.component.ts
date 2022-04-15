@@ -11,6 +11,7 @@ import { PlaceSummary } from 'wft-geodb-angular-client/lib/model/place-summary.m
 import { GeoDbService } from 'wft-geodb-angular-client';
 import { AutoSuggestConstants } from 'src/app/common/auto-suggest-constants';
 import { GeoResponse } from 'wft-geodb-angular-client/lib/model/geo-response.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pop-up-model',
@@ -29,20 +30,22 @@ export class PopUpModelComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions!: Observable<string[]>;
 
-  constructor(private geoDbService: GeoDbService, private router1: Router, private cityService: CityService) { }
+  constructor(private toastr: ToastrService,private geoDbService: GeoDbService, private router1: Router, private cityService: CityService) { }
   @Input()  cities: CityWeather[] = [];
 
   ngOnInit(): void {
-   // this.getCityList();
     this.showCitySuggestion();
   }
 
   saveCity() {
     this.cityTemp.cityName = this.cityName.name;
     if (this.cityName.name == undefined) {
-      alert("City Name is not Correct...!")
+     // this.toastr.success('Hello world!', 'Toastr fun!');
+      alert("Please select name from suggestions...!")
     } else {
-      this.cityService.saveCity(this.cityTemp).subscribe(data => {
+      this.cityService.saveCity(this.cityTemp).subscribe(response => {
+       // this.toastr.success('Hello world!', 'Toastr fun!');
+        alert(response);
         this.getCityList();
       });
     }
@@ -73,9 +76,9 @@ export class PopUpModelComponent implements OnInit {
     })
   }
 
-  showCity(location1: string) {
+  viewCity(location1: string) {
     console.log(location1);
-    this.router1.navigateByUrl(`showWeather/${this.cities[0].cityName}`);
+    this.router1.navigateByUrl(`showWeather/${location1}`);
     console.log("after")
   }
 

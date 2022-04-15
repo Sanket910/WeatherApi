@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { RootObject } from 'src/app/common/root-object';
 import { WeatherService } from 'src/app/service/weather.service';
 
@@ -11,7 +12,7 @@ import { WeatherService } from 'src/app/service/weather.service';
 export class ShowWeatherComponent implements OnInit {
   weatherInfo!: RootObject;
   name!: string;
-  constructor(private wheatherService: WeatherService, private router: ActivatedRoute) {
+  constructor(private toastr: ToastrService,private wheatherService: WeatherService, private router: ActivatedRoute) {
     router.params.subscribe(val => {
       this.getWeather(val['location']);
     });
