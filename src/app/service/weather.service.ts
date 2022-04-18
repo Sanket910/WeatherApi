@@ -14,7 +14,9 @@ export class WeatherService {
 
   private baseurl = 'http://localhost:8762/weather';
 
+  //get weather information by using city name
   getWeatherInfo(location: string): Observable<RootObject> {
+    
     return this.httpClient.get<RootObject>(`${this.baseurl}/${location}`);
   }
 }

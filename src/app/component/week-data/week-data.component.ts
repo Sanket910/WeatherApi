@@ -9,11 +9,14 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./week-data.component.css']
 })
 export class WeekDataComponent implements OnInit {
+  
+  //get weather information from parent component
   @Input() weatherInfo!: RootObject;
 
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
+
   }
 
 }

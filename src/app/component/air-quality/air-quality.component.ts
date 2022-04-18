@@ -8,11 +8,12 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./air-quality.component.css']
 })
 export class AirQualityComponent implements OnInit {
+  
+  //Used to store weather Information in child component
   @Input() weatherInfo!: RootObject;
+
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
-
   }
-
 }

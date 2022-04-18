@@ -5,6 +5,7 @@ import { CityService } from './service/city.service';
 import { WeatherService } from './service/weather.service';
 import { CityWeather } from './common/city-weather';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,39 +13,47 @@ import { CityWeather } from './common/city-weather';
 })
 
 export class AppComponent {
+
+  //wether information
   weatherInfo!: RootObject;
   cities: CityWeather[] = [];
   count: number = 0;
-  show : boolean =false;
+  show: boolean = false;
+
   constructor(private router1: Router, private wheatherService: WeatherService,
-    private cityService: CityService, private router: ActivatedRoute) { }
+    private cityService: CityService, private router: ActivatedRoute ) { }
 
   ngOnInit() {
+
     this.getCityList();
   }
 
+  //get cities list from backend
   getCityList() {
     this.cityService.getCities().subscribe(data => {
+
       this.cities = data;
-      this.show=true;
+      this.show = true;
       this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
     });
   }
 
+  //show prevoius city weather information from cities list
   previousCity() {
+
     if (this.count > 0) {
-   
+
       this.count--;
-      console.log("previous = "+this.count);
       this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
     }
-
   }
 
+  //show next city weather information from cities list
   nextCity() {
-    if (this.count < this.cities.length-1) {
+
+    if (this.count < this.cities.length - 1) {
+
       this.count++;
-      console.log("next ="+this.count);
       this.router1.navigateByUrl(`showWeather/${this.cities[this.count].cityName}`);
     }
   }

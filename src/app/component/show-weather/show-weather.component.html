@@ -1,15 +1,22 @@
 <div>
+    <!-- R1 Show today weather info day minimum maximum temprature -->
     <app-current [weatherInfo]="weatherInfo"></app-current>
+    <!-- horizontal line -->
     <hr class="bg-danger border-2 border-top border-danger">
+    <!-- R2 show next twelve hours maximum temprature from current time -->
     <app-hours-data [weatherInfo]="weatherInfo"></app-hours-data>
     <hr class="bg-danger border-2 border-top border-danger">
     <div class="row">
+        <!--R3 C1 show netxt two days weather info -->
         <app-week-data [weatherInfo]="weatherInfo" class="col-md-7 col-sm-7"></app-week-data>
+        <!-- R3 C2 show astrology for today -->
         <app-astro-data [weatherInfo]="weatherInfo" class="col-md-4 col-sm-4"></app-astro-data>
     </div>
     <hr class="bg-danger border-2 border-top border-danger">
     <div class="row">
+        <!-- R4 C1 Air details-->
         <app-air-quality [weatherInfo]="weatherInfo" class="col-md-4 col-sm-4"></app-air-quality>
+        <!-- R4 C2 UV details-->
         <app-uv-index [weatherInfo]="weatherInfo" class="col-md-4 col-sm-4"></app-uv-index>
     </div>
 </div>

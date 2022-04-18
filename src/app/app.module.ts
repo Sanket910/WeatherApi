@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
 import { WeatherService } from './service/weather.service';
-
 import { CurrentComponent } from './component/current/current.component';
 import { HoursDataComponent } from './component/hours-data/hours-data.component';
 import { WeekDataComponent } from './component/week-data/week-data.component';
@@ -19,8 +18,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopUpModelComponent } from './component/pop-up-model/pop-up-model.component';
-import { CityListComponent } from './component/city-list/city-list.component';
-import { AddCityComponent } from './component/add-city/add-city.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -47,8 +44,6 @@ import { ToastrModule } from 'ngx-toastr';
     UvIndexComponent,
     ShowWeatherComponent,
     PopUpModelComponent,
-    CityListComponent,
-    AddCityComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +73,8 @@ import { ToastrModule } from 'ngx-toastr';
       serviceUri: 'http://geodb-free-service.wirefreethought.com'
     }),
     MDBBootstrapModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({positionClass: 'toast-bottom-center',
+    preventDuplicates: true,}),
   ],
   providers: [WeatherService, CityService],
   bootstrap: [AppComponent]

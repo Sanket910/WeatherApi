@@ -19,9 +19,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./pop-up-model.component.css']
 })
 export class PopUpModelComponent implements OnInit {
-  cityName!: PlaceSummary;
-  cityTemp = new City();
 
+  //Used to store City from autocomplete fild of input of PlaceSummary type
+  cityName!: PlaceSummary;
+  //used to store city information
+  cityTemp = new City();
   private MIN_CITY_POPULATION = 40000;
   selectedCity!: PlaceDetails;
   cityControl!: FormControl;
@@ -29,64 +31,86 @@ export class PopUpModelComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions!: Observable<string[]>;
+  //used to store city list from database
+  @Input() cities: CityWeather[] = [];
 
-  constructor(private toastr: ToastrService,private geoDbService: GeoDbService, private router1: Router, private cityService: CityService) { }
-  @Input()  cities: CityWeather[] = [];
+  constructor(private toastr: ToastrService, private geoDbService: GeoDbService, private router1: Router, private cityService: CityService) { }
 
   ngOnInit(): void {
+
     this.showCitySuggestion();
   }
 
+  //this method used to store city in database
   saveCity() {
+
     this.cityTemp.cityName = this.cityName.name;
     if (this.cityName.name == undefined) {
-     // this.toastr.success('Hello world!', 'Toastr fun!');
-      alert("Please select name from suggestions...!")
+
+      this.toastr.warning("Please select name from suggestions or enter correct city name", '');
     } else {
+
       this.cityService.saveCity(this.cityTemp).subscribe(response => {
-       // this.toastr.success('Hello world!', 'Toastr fun!');
-        alert(response);
+        this.toastr.success(response, '');
         this.getCityList();
+      }, error => {
+        var err = JSON.parse(error.error)
+        this.toastr.error(err.message, "");
       });
     }
   }
 
+  //update drag and drop list
   drop(event: CdkDragDrop<CityWeather[]>) {
+
     moveItemInArray(this.cities, event.previousIndex, event.currentIndex);
     this.saveSortList(this.cities);
   }
 
+  //get city list from databse
   getCityList() {
+
     this.cityService.getCities().subscribe(data => {
       this.cities = data;
     });
   }
 
+  //save sorted list into database
   saveSortList(cities: CityWeather[]) {
+
     this.cityService.saveSortList(cities).subscribe(data => {
-      console.log(data);
       this.getCityList();
     });
   }
 
+  //delet city from database
   deleteCity(id: number) {
-    this.cityService.deleteCity(id).subscribe(data => {
-      alert(data);
-      this.getCityList();
-    })
+    if (confirm("Do you want to delete city?")) {
+
+      this.cityService.deleteCity(id).subscribe(response => {
+        this.toastr.success(response, '');
+        this.getCityList();
+      }, error => {
+        var err = JSON.parse(error.error)
+        this.toastr.error(err.message, "");
+      });
+    }
   }
 
+  //show weather detils after click view button from list
   viewCity(location1: string) {
-    console.log(location1);
+
     this.router1.navigateByUrl(`showWeather/${location1}`);
-    console.log("after")
   }
 
+  //Show city suggestion list by using autocomplete field
   showCitySuggestion() {
+
     this.cityControl = new FormControl();
     this.filteredCities = this.cityControl.valueChanges
       .pipe(
         switchMap((cityNamePrefix: string) => {
+
           let citiesObservable: Observable<PlaceSummary[]> = of([]);
           if (cityNamePrefix && cityNamePrefix.length >= AutoSuggestConstants.MIN_INPUT_LENGTH) {
             citiesObservable = this.geoDbService.findPlaces({
@@ -100,10 +124,9 @@ export class PopUpModelComponent implements OnInit {
               .pipe(
                 map(
                   (response: GeoResponse<PlaceSummary[]>) => {
-                    console.log(response.data)
                     return response.data;
                   },
-                  (error: any) => console.log(error)
+                  (error: any) => this.toastr.error(error)
                 )
               );
           }
@@ -112,7 +135,9 @@ export class PopUpModelComponent implements OnInit {
       );
   }
 
+  //return only city name for display in suggestion
   getCityDisplayName(city: PlaceSummary) {
+
     if (!city) {
       return '';
     }

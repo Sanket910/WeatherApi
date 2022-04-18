@@ -1,3 +1,4 @@
+ <!-- R1 Show today weather info day minimum maximum temprature -->
 <div class="row ">
     <div class="col-md-6 col-sm-6">
         <h1>{{weatherInfo.location.name}}</h1>
@@ -6,6 +7,7 @@
         L:{{weatherInfo.forecast.forecastday[0].day.mintemp_c | number : '1.0-0'}}<span>&#176;</span><br>
         <h3><strong>{{weatherInfo.location.localtime | date : 'EEEE'}}</strong> Today</h3>
     </div>
+    <!-- right side todays temprature -->
     <div class="col-md-6 col-sm-6 text-end">
         <h1 class="texts">{{weatherInfo.current.temp_c | number : '1.0-0'}}<span>&#176;</span></h1>
     </div>

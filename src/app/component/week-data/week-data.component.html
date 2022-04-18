@@ -1,6 +1,8 @@
+<!-- show information for next two days minimum and maximum temprature in table -->
 <div class="right">
     <table class="table text-white">
         <ng-container *ngFor="let forecast of weatherInfo.forecast.forecastday; let j=index">
+            <!-- skipping the current day forcast -->
             <tr *ngIf="j>0">
                 <td class="h5" >{{forecast.date | date : 'EEEE'}}</td>
                 <td><img src="{{ forecast.day.condition.icon}}"></td>

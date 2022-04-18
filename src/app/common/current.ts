@@ -2,7 +2,7 @@ import { Condition } from './condition';
 import { AirQuality } from './air-quality';
 
 export class Current {
-    last_updated_epoch!: number;
+        last_updated_epoch!: number;
         last_updated!: string;
         temp_c!: number;
         temp_f!: number;

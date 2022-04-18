@@ -10,9 +10,13 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./show-weather.component.css']
 })
 export class ShowWeatherComponent implements OnInit {
+
   weatherInfo!: RootObject;
   name!: string;
+
   constructor(private toastr: ToastrService,private wheatherService: WeatherService, private router: ActivatedRoute) {
+
+    //get city name from url
     router.params.subscribe(val => {
       this.getWeather(val['location']);
     });
@@ -21,12 +25,13 @@ export class ShowWeatherComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //get weather information using city name
   getWeather(location: string) {
-    console.log("inside get weather" + location)
+
+    //console.log("inside get weather" + location)
     this.wheatherService.getWeatherInfo(location).subscribe(
       data => {
         this.weatherInfo = data;
-        console.log(this.weatherInfo);
       }
     );
   }

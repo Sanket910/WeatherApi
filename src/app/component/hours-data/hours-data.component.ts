@@ -9,9 +9,12 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./hours-data.component.css']
 })
 export class HoursDataComponent implements OnInit {
+
   hours: Hour[] = [];
   count: number = 0;
+//get weather details from parent component
   @Input() weatherInfo!: RootObject;
+
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {
@@ -23,6 +26,7 @@ export class HoursDataComponent implements OnInit {
     this.getHoursList();
   }
 
+  //get hourly temprature of next 12 hours from current time
   getHoursList() {
     for (let forcast of this.weatherInfo.forecast.forecastday) {
       for (let hour of forcast.hour) {

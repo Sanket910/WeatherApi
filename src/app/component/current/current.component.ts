@@ -8,8 +8,9 @@ import { WeatherService } from 'src/app/service/weather.service';
   styleUrls: ['./current.component.css']
 })
 export class CurrentComponent implements OnInit {
-
+  //Used to store Weather information
   @Input() weatherInfo!: RootObject;
+
   constructor(private wheatherService: WeatherService) { }
 
   ngOnInit(): void {

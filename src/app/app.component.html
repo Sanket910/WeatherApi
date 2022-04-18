@@ -1,7 +1,9 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Send list of cities to pop-up-model-component -->
     <app-pop-up-model [cities]="cities"></app-pop-up-model>
 </div>
+
 <div class="container bg-primary text-white" *ngIf="show">
     <!-- Router outlet -->
     <router-outlet></router-outlet>
